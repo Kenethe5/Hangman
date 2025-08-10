@@ -3,12 +3,17 @@
 #include <string>
 #include "hangman_functions.h"
 using namespace std;
-
+/*VERSION 2 FEATURES
+    -word guesses will be more forgiving, ignoring caps
+    -randomly generate words derived from a file
+    -fix bugs
+*/
 int main() {
     greet();
     
     string codeword;
     getline(cin, codeword);
+
     char answer[codeword.length() + 1];
     for(int i = 0; i < codeword.length(); i++)
         answer[i] = '_';
@@ -18,15 +23,15 @@ int main() {
     bool guess = false; 
     vector<char> incorrect;
     char letter;
-
     while (answer != codeword && misses < 6) {
         display(misses);
         display_words(incorrect,answer);
         cout << "Enter a letter: ";
         cin >> letter;
+        
         for(int i = 0; i < codeword.length(); i++) {
-            if (letter == codeword[i]) {
-                answer[i] = letter;
+            if (letter == tolower(codeword[i]) ) {
+                answer[i] = codeword[i];
                 guess = true;
             }
         }
