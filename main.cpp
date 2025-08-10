@@ -6,8 +6,9 @@ using namespace std;
 
 int main() {
     greet();
-
-    string codeword = "semperfidelis";
+    
+    string codeword;
+    getline(cin, codeword);
     char answer[codeword.length() + 1];
     for(int i = 0; i < codeword.length(); i++)
         answer[i] = '_';

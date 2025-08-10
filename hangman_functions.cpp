@@ -8,6 +8,7 @@ void greet() {
     cout << "Welcome to hangman!\n";
     cout << "Guess the code word before your friend is hung to death!\n";
     cout << "===================================================\n";
+    cout << "Please enter a codeword to guess: ";
 }
 
 void display(int m) {
