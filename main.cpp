@@ -14,10 +14,12 @@ int main() {
     string codeword;
     getline(cin, codeword);
 
-    char answer[codeword.length() + 1];
-    for(int i = 0; i < codeword.length(); i++)
+    string answer = codeword;
+    for(int i = 0; i < codeword.length(); i++) {
         answer[i] = '_';
-    answer[codeword.length()] = '\0';
+        if (codeword[i] == ' ' || codeword[i] == '-')
+            answer[i] = codeword[i];
+    }
 
     int misses = 0;
     bool guess = false; 
@@ -28,6 +30,7 @@ int main() {
         display_words(incorrect,answer);
         cout << "Enter a letter: ";
         cin >> letter;
+        letter = tolower(letter);
         
         for(int i = 0; i < codeword.length(); i++) {
             if (letter == tolower(codeword[i]) ) {
@@ -45,6 +48,8 @@ int main() {
     }
     guess = false;
     }
+    guess = false;
+
     exit_screen(misses, codeword, incorrect, answer);
 
 

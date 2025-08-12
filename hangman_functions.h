@@ -8,8 +8,8 @@ using namespace std;
  
 void greet();
 void display(int);\
-void display_words(vector<char>, char[]);
-void exit_screen(int,string,vector<char>, char[]);
+void display_words(vector<char>, string);
+void exit_screen(int,string,vector<char>, string);
 
 #endif
 

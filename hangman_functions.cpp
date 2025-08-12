@@ -98,7 +98,7 @@ void display(int m) {
     }
 }
 
-void display_words(vector<char> incorrect, char ans[]) {
+void display_words(vector<char> incorrect, string ans) {
     for(int i = 0; i < incorrect.size(); i++)
         cout << incorrect[i] << " ";
     cout << endl;
@@ -106,7 +106,7 @@ void display_words(vector<char> incorrect, char ans[]) {
     
 }
 
-void exit_screen(int misses, string codeword, vector<char> incorrect, char ans[]) {
+void exit_screen(int misses, string codeword, vector<char> incorrect, string ans) {
     if (misses < 6) {
         display(misses);
         display_words(incorrect,ans);
