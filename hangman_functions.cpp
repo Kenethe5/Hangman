@@ -6,7 +6,8 @@
 #include "hangman_functions.h"
 using namespace std;
 
-void greet() {
+void greet()
+{
     cout << "==================================================\n";
     cout << "Welcome to hangman!\n";
     cout << "Guess the code word before your friend is hung to death!\n";
@@ -14,8 +15,10 @@ void greet() {
     cout << "Please enter a codeword to guess: ";
 }
 
-void display(int m) {
-    if (m == 0) {
+void display(int m)
+{
+    if (m == 0)
+    {
         cout << "_________________________\n";
         cout << "|         ______         |\n";
         cout << "|         |    |         |\n";
@@ -27,23 +30,25 @@ void display(int m) {
         cout << "| misses: " << m << "              |\n";
         cout << "|________________________|\n";
     }
-    else if (m == 1) {
-        cout << "_________________________\n";
-        cout << "|         ______         |\n";
-        cout << "|         |    |         |\n";
-        cout << "|         O    |         |\n";
-        cout << "|              |         |\n";
-        cout << "|            __|___      |\n";
-        cout << "|________________________|\n";
-        cout << "|                        |\n";
-        cout << "| misses: " << m << "              |\n";
-        cout << "|________________________|\n";
-    }
-    else if (m == 2) {
+    else if (m == 1)
+    {
         cout << "_________________________\n";
         cout << "|         ______         |\n";
         cout << "|         |    |         |\n";
         cout << "|         O    |         |\n";
+        cout << "|              |         |\n";
+        cout << "|            __|___      |\n";
+        cout << "|________________________|\n";
+        cout << "|                        |\n";
+        cout << "| misses: " << m << "              |\n";
+        cout << "|________________________|\n";
+    }
+    else if (m == 2)
+    {
+        cout << "_________________________\n";
+        cout << "|         ______         |\n";
+        cout << "|         |    |         |\n";
+        cout << "|         O    |         |\n";
         cout << "|         |    |         |\n";
         cout << "|            __|___      |\n";
         cout << "|________________________|\n";
@@ -51,7 +56,8 @@ void display(int m) {
         cout << "| misses: " << m << "              |\n";
         cout << "|________________________|\n";
     }
-    else if (m == 3) {
+    else if (m == 3)
+    {
         cout << "_________________________\n";
         cout << "|         ______         |\n";
         cout << "|         |    |         |\n";
@@ -63,7 +69,8 @@ void display(int m) {
         cout << "| misses: " << m << "              |\n";
         cout << "|________________________|\n";
     }
-    else if (m == 4) {
+    else if (m == 4)
+    {
         cout << "_________________________\n";
         cout << "|         ______         |\n";
         cout << "|         |    |         |\n";
@@ -75,7 +82,8 @@ void display(int m) {
         cout << "| misses: " << m << "              |\n";
         cout << "|________________________|\n";
     }
-    else if (m == 5) {
+    else if (m == 5)
+    {
         cout << "_________________________\n";
         cout << "|         ______         |\n";
         cout << "|         |    |         |\n";
@@ -87,7 +95,8 @@ void display(int m) {
         cout << "| misses: " << m << "              |\n";
         cout << "|________________________|\n";
     }
-    else if (m == 6) {
+    else if (m == 6)
+    {
         cout << "_________________________\n";
         cout << "|         ______         |\n";
         cout << "|         |    |         |\n";
@@ -101,41 +110,68 @@ void display(int m) {
     }
 }
 
-void display_words(vector<char> incorrect, string ans) {
-    for(int i = 0; i < incorrect.size(); i++)
+void display_words(vector<char> incorrect, string ans)
+{
+    for (int i = 0; i < incorrect.size(); i++)
         cout << incorrect[i] << " ";
     cout << endl;
     cout << "Answer: " << ans << endl;
-    
 }
 
-void exit_screen(int misses, string codeword, vector<char> incorrect, string ans) {
-    if (misses < 6) {
+bool exit_screen(int misses, string codeword, vector<char> incorrect, string ans)
+{
+    int key;
+    if (misses < 6)
+    {
         display(misses);
-        display_words(incorrect,ans);
+        display_words(incorrect, ans);
         cout << "\nCongratulations! You have guessed the word!\n";
     }
-    else {
+    else
+    {
         display(misses);
-        display_words(incorrect,ans);
+        display_words(incorrect, ans);
         cout << "\nYou lost! Your friend has been hung!\nThe codeword was " << codeword << endl;
     }
     cout << "\n=============================================\n";
+
+    cout << "Would you like to play again?\n";
+    do {
+    cout << "1 - Yes\n2 - No\n";
+    cout << "--> ";
+    cin.clear();
+    cin >> key;
+
+    if (key == 1)
+        return true;
+    else if (key == 2)
+        return false;
+    else {
+        cout << "ERROR: Invalid input, try again...\n";
+        cin.clear();
+        cin.ignore(1000000, '\n');
+    }
+    } while (key < 1 || key > 2);
+    return false;
 }
 
-string getRandomWord(const string& filename) {
+string getRandomWord(const string &filename)
+{
     ifstream file(filename);
-    if (!file) {
+    if (!file)
+    {
         cout << "ERROR: File not found!\n";
         exit(1);
     }
     vector<string> words;
     string word;
 
-    while(getline(file,word)) {
+    while (getline(file, word))
+    {
         words.push_back(word);
     }
-    if(words.empty()) {
+    if (words.empty())
+    {
         cout << "ERROR: File is empty!\n";
         exit(1);
     }
@@ -147,16 +183,20 @@ string getRandomWord(const string& filename) {
     return words[ran_index];
 }
 
-bool seen(char letter, vector<char> incorrect) {
-    for (int i = 0; i < incorrect.size(); i++) {
+bool seen(char letter, vector<char> incorrect)
+{
+    for (int i = 0; i < incorrect.size(); i++)
+    {
         if (letter == incorrect[i])
             return true;
     }
     return false;
 }
 
-bool seen(char letter, string answer) {
-    for (int i = 0; i < answer.size(); i++) {
+bool seen(char letter, string answer)
+{
+    for (int i = 0; i < answer.size(); i++)
+    {
         if (letter == answer[i])
             return true;
     }
